@@ -2,11 +2,20 @@ import tkinter
 from tkinter import *
 import time
 import keyboard
+import threading
+import webbrowser
 
+A = True
+
+def stop():
+    global A
+    A = False
 
 def start():
-    time.sleep(3)
-    while True:
+    global A
+    A = True
+    time.sleep(5)
+    while A == True:
         for i in range (7):
             time.sleep(0.1)
             keyboard.press_and_release("enter")
@@ -26,18 +35,28 @@ def start():
             time.sleep(0.1)
             keyboard.press_and_release("s")
 
+def StartThreadFunction(): 
+    StartThread = threading.Thread(target=start).start()
+
+def opentut():
+    webbrowser.open("https://youtu.be/NZJE5to_AiA")
+
+
 root = Tk(className="Grow a garden automation")
 root.geometry("300x300")
 label = Label(root, text='Grow a garden automation V1')
 
-button = Button(root, text="Start automation", command=start)
+buttonstart = Button(root, text="START automation", command=StartThreadFunction)
+buttonstop = Button(root, text="STOP automation", command=stop)
 
 tuttext = Label(root, text='Please watch our tutorial before using!')
-tutlabel = Label(root, text='link')
+tutlabel = Button(root, text='Tutorial', command=opentut)
 discord = Label(root, text='add me on discord for update ideas: cookiejeje')
 
+
 label.pack()
-button.pack()
+buttonstart.pack()
+buttonstop.pack()
 tuttext.pack()
 tutlabel.pack()
 discord.pack()
