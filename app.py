@@ -66,8 +66,11 @@ def start():
             # Buy the fruit
             keyboard.press_and_release("enter")
             time.sleep(0.1)
-            keyboard.press_and_release("enter")
-            time.sleep(0.1)
+            keyboard.press_and_release("s")
+            for i in range(5):
+                keyboard.press_and_release("enter")
+                time.sleep(0.2)
+            keyboard.press_and_release("w")
 
         for _ in range(current_idx):
             keyboard.press_and_release("s")
